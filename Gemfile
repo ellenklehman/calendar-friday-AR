@@ -1,9 +1,12 @@
 source 'https://rubygems.org'
 
+gem 'activerecord'
+gem 'active_record_migrations'
+gem 'pg'
+gem 'rake'
 
-require 'active_record'
-require 'pg'
-require 'pry'
-require 'rake'
-require 'rspec'
-require 'active_record_migrations'
+group :test do
+  gem 'pry'
+  gem 'rspec'
+  gem 'shoulda-matchers'
+end
