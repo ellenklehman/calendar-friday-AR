@@ -30,6 +30,35 @@ describe Event do
                                         event_nextmonth]
 
     end
+  end
 
+  describe ".all_by_date" do
+    it "returns all of the events that take place today" do
+      event_yesterday = Event.create({:description => "sleep",
+                                      :start_date => Date.today - 1,
+                                      :end_date => Date.today - 1})
+
+      event_today = Event.create({:description => "sleep off hangover from tech thingy",
+                                  :start_date => Date.today, :end_date => Date.today})
+
+      expect(Event.all_by_date).to eq [event_today]
+
+    end
+
+    it "returns all of the events taking place this week" do
+      event_tomorrow = Event.create({:description => "Save World",
+                                      :start_date => Date.today + 1,
+                                      :end_date => Date.today + 1})
+
+      event_after_tomorrow = Event.create({:description => "Destroy World",
+                                      :start_date => Date.today + 2,
+                                      :end_date => Date.today + 2})
+
+      event_yesterday = Event.create({:description => "have early mid-life crisis",
+                                      :start_date => Date.today - 1,
+                                      :end_date => Date.today - 1})
+
+      expect(Event.all_by_date(Date.today, Date.today + 7)).to eq [event_tomorrow, event_after_tomorrow]
+    end
   end
 end
