@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe Event do
+  I18n.enforce_available_locales = false
+
+  it { should validate_presence_of :description }
+  it { should validate_uniqueness_of :description }
+
   describe ".all_ordered" do
     it 'will list out events in the order in which they occur' do
       another_event = Event.create({:description => 'Feed the cat', :location => 'home', :start_date => Date.today + 2, :end_date => Date.today + 2})

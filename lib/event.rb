@@ -1,5 +1,7 @@
 
 class Event < ActiveRecord::Base
+  validates :description, presence: true
+  validates_uniqueness_of :description
 
   def self.all_ordered
     self.where("start_date > '#{Date.today.to_s}'").order(:start_date)
