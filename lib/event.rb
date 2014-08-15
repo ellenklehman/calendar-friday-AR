@@ -12,4 +12,9 @@ class Event < ActiveRecord::Base
                 end_date <= '#{end_day.to_s}'").order(:start_date)
   end
 
+  def self.to_dos
+    self.where("start_date IS NULL AND
+                end_date IS NULL")
+  end
+
 end

@@ -66,4 +66,12 @@ describe Event do
       expect(Event.all_by_date(Date.today, Date.today + 7)).to eq [event_tomorrow, event_after_tomorrow]
     end
   end
+
+  describe ".to_dos" do
+    it 'will list all to-dos' do
+      to_do = Event.create({:description => "Active Record Assessment"})
+      to_do_two = Event.create({:description => "Update Linkedin"})
+      expect(Event.to_dos).to eq [to_do, to_do_two]
+    end
+  end
 end
